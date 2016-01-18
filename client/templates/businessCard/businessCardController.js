@@ -206,7 +206,7 @@ Template.profileView.events({
   'click #downloadCSV': function() {
     var userData = Meteor.user();
     console.log(userData);
-    var date = new Date();
+    var date = "2016-01-18T22:51:08+01:00";
     
     var csv = Papa.unparse({
       fields: ["BEGIN", "VCARD"],
@@ -218,11 +218,10 @@ Template.profileView.events({
         ["TEL;TYPE=WORK,VOICE", userData.profile.job.tel],
         ["LABEL;CHARSET=UTF-8;TYPE=WORK", "Work Address"],
         ["ADR;CHARSET=UTF-8;TYPE=WORK", ';;' + userData.profile.job.address + ';' + userData.profile.job.city +';;' + userData.profile.job.postalCode + ';' + userData.profile.job.countryRegion],
-        ["TITLE;CHARSET=UTF-8:", userData.profile.job.title],
+        ["TITLE;CHARSET=UTF-8", userData.profile.job.title],
         ["ORG;CHARSET=UTF-8", userData.profile.job.company],
         ["URL;CHARSET=UTF-8", userData.profile.job.website],
         ["X-SOCIALPROFILE;CHARSET=UTF-8;TYPE=twitter", userData.profile.social.twitter],
-        ["REV", date],
         ["END", "VCARD"]
       ]
     }, {
@@ -230,10 +229,18 @@ Template.profileView.events({
       delimiter: ":",
       newline: "\r\n"
     });
+
+    var content = 'BEGIN:VCARD\n' +
+    'VERSION:3.0\n' +
+    'FN:' + userData.profile.firstName + ' ' + userData.profile.lastName + '\n'
+    'N:' + userData.profile.lastName + ';' + userData.profile.firstName + ';;;;\n' +
+    'EMAIL;type=INTERNET;type=pref:' + userData.profile.job.email + '\n' +
+    'PROFILE:VCARD\n' +
+    'END:VCARD\n';
     
     console.log(csv);
     
-    var csvFile = new Blob([csv], {type: "text/vcard;charset=utf-8"});
+    var csvFile = new Blob([content], {type: "text/x-vcard"});
     saveAs(csvFile, userData.profile.firstName + ' ' + userData.profile.lastName + '.vcf');
     
   }
