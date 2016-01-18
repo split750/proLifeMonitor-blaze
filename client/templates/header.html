@@ -1,0 +1,26 @@
+<template name="header">
+  <nav class="main-menu">
+	  <div class="max-width">
+	    <div class="col-sm-3 col-xs-12 brand">
+	      <a class="" href="/">Digital <span>Card</span></a>
+	    </div>
+	    <div>
+	      <div class="col-sm-5 col-xs-12 navigation">
+	        <div  >
+	          <a class="{{#if currentUser}}visible{{/if}}">Edit Profile</a>
+	        </div>
+	      </div>
+	      <div class="col-sm-4 col-xs-12 right">
+	        <div class="{{#if currentUser}}hidden{{/if}}">
+	          <a class="menu-button primary">Login</a>
+	          <a class="menu-button secondary">Register</a>
+	        </div>
+	        <div class="{{#if currentUser}}visible{{/if}}">
+	          <p class="">Signed in as <a href="/profile">{{currentUser.username}}</a></p>
+	          <a class="menu-button warning" href="/logout">Logout</a>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+  </nav>
+</template>
