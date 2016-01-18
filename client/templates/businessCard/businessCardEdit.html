@@ -1,7 +1,7 @@
 <template name="profileEdit">
 
 	<div class="container-fluid">
-		<form class="col-xs-12">
+		<form id="cardInfo" class="col-xs-12">
 			<div class="row">
 				<div class="col-md-12 container-main">
 					<div class="container-title">
@@ -21,50 +21,6 @@
 					        	<label for="lastName">Last Name</label>
 					        	<input class="form-control" type="text" id="lastName" name="lastName" placeholder="Enter your Last name" value="{{userData.profile.lastName}}">
 					        </fieldset>
-					    </div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 container-main">
-					<div class="container-title">
-						<h1>Edit your photos</h1>
-					</div>
-					<h3><span class="semi-bold">Profil</span> pictures</h3>
-					<div class="row">
-						<div class="col-sm-6">
-					    </div>
-					    <div class="col-sm-6 profil-pic">
-					    	<cl-image public-id="{{profil.profilPic}}" ng-show="showprofilPic"></cl-image>
-					    	<cl-image public-id="{{profilPic}}" ng-hide="showprofilPic"></cl-image>
-					    </div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4" ngf-drop="uploadFiles2($files)" ng-model="myFile2" ng-multiple="false">
-							<fieldset class="form-group">
-					        	<label>Background picture</label>
-					        	<div class="upload_button_holder">
-				                    <div href="#" class="btn btn-default" title="upload2" resetOnClick="true" >Upload background</div>
-				                </div>
-				            </fieldset>
-					    </div>
-					    <div class="col-sm-8 editBg">
-					    	<cl-image public-id="{{profil.bg}}" ng-show="showbg"></cl-image>
-					    	<cl-image public-id="{{bg}}" ng-hide="showbg"></cl-image>
-					    </div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6" ngf-drop="uploadFiles3($files)" ng-model="files" ng-multiple="false">
-							<fieldset class="form-group">
-					        	<label>Company picture</label>
-					        	<div class="upload_button_holder">
-				                    <div href="#" class="btn btn-default" ngf-select="uploadFiles3($files)" title="upload3" resetOnClick="true" >Upload company logo</div>
-				                </div>
-				            </fieldset>
-					    </div>
-					    <div class="col-sm-6 editBg">
-					    	<cl-image public-id="{{profil.companyLogo}}" ng-show="showcompanyLogo"></cl-image>
-					    	<cl-image public-id="{{companyLogo}}" ng-hide="showcompanyLogo"></cl-image>
 					    </div>
 					</div>
 				</div>
@@ -173,6 +129,73 @@
 			<div class="row">
 				<div class="col-md-12 container-main">
 					<div class="container-title">
+						<h1>Edit your photos</h1>
+					</div>
+					<h3><span class="semi-bold">Profil</span> pictures</h3>
+					<div class="row">
+						<div class="col-sm-6">
+							<form id="profilePic" class="row uploadPicture">
+								<fieldset class="form-group">
+									<label class="col-xs-12">Profile picture</label>
+									<input type="file" id="profilePicFile" class="col-xs-12">
+								 	<button type="submit" class="col-xs-3">{{imageIsSubmitting}}</button>
+								</fieldset>
+							</form>
+					    </div>
+					    <div class="col-sm-6 profil-pic">
+					    	<img src="{{c.url userData.profile.pictures.profile}}">
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<form id="backgroundPic" class="row uploadPicture">
+								<fieldset class="form-group">
+									<label class="col-xs-12">Background picture</label>
+									<input type="file" id="backgroundPicFile" class="col-xs-12">
+								 	<button type="submit" class="col-xs-3">{{imageIsSubmitting}}</button>
+								</fieldset>
+							</form>
+					    </div>
+					    <div class="col-sm-6 editBg">
+					    	<img src="{{c.url userData.profile.pictures.background}}">
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6" ngf-drop="uploadFiles3($files)" ng-model="files" ng-multiple="false">
+								<fieldset class="form-group">
+									<label class="col-xs-12">Company logo</label>
+									<input type="file" id="companyPicFile" class="col-xs-12">
+								 	<button type="submit" class="col-xs-3">{{imageIsSubmitting}}</button>
+								</fieldset>
+					    </div>
+					    <div class="col-sm-6 editBg">
+					    	{{#if companyLogoPublicId}}
+					    		<img src="{{c.url companyLogoPublicId}}">
+					    	{{else}}
+					    		<img src="{{c.url userData.profile.pictures.companyLogo}}">
+					    	{{/if}}
+					    </div>
+					</div>
+					{{#if profilPicPublicId}}
+						<input type="text" name="profilPic" class="hidden" value="{{profilPicPublicId}}">
+					{{else}}
+						<input type="text" name="profilPic" class="hidden" value="{{userData.profile.pictures.profile}}">
+					{{/if}}
+					{{#if backgroundPicPublicId}}
+						<input type="text" name="backgroundPic" class="hidden" value="{{backgroundPicPublicId}}">
+					{{else}}
+						<input type="text" name="backgroundPic" class="hidden" value="{{userData.profile.pictures.background}}">
+					{{/if}}
+					{{#if companyLogoPublicId}}
+						<input type="text" name="companyLogo" class="hidden" value="{{companyLogoPublicId}}">
+					{{else}}
+						<input type="text" name="companyLogo" class="hidden" value="{{userData.profile.pictures.companyLogo}}">
+					{{/if}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 container-main">
+					<div class="container-title">
 						<h1>Edit your social networks</h1>
 					</div>
 					<h3><span class="semi-bold">Social</span> contacts</h3>
@@ -203,5 +226,6 @@
 		    </div>
 	    </form>
 	</div>
+
 
 </template>

@@ -8,19 +8,19 @@
 			</div>
 			-->
 			<div class="col-xs-12 header-bg">
-				<cl-image public-id="{{profil.bg}}" ></cl-image>
+				<img src="{{c.url userData.profile.pictures.background}}">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 container-main first">
 				<div class="row">
 					<div class="col-xs-12 logo">
-						<cl-image public-id="{{profil.companyLogo}}" ></cl-image>
+						<img src="{{c.url userData.profile.pictures.companyLogo}}">
 					</div>
 				</div>
 				<div class="row profil-header">
 					<div class="col-sm-3 col-xs-12 profil-pic">
-						<cl-image public-id="{{profil.profilPic}}" ></cl-image>
+						<img src="{{c.url userData.profile.pictures.profile}}">
 					</div>
 					<div class="col-sm-9 col-xs-12 name">
 						<h1 class="h1 firstName">{{userData.profile.firstName}}, <span class="lastName">{{userdata.profile.lastName}}</span></h1>

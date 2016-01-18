@@ -45,6 +45,10 @@ Router.route('/profile/edit', {
 	onBeforeAction: function () {
 		Session.set('errorMessage', null);
 		Session.set('isSubmitting', 'submit');
+		Session.set('imageIsSubmitting', 'upload');
+		Session.set('profilPicPublicId', null);
+		Session.set('backgroundPicPublicId', null);
+		Session.set('companyLogoPublicId', null);
 		this.next();
 	},
 	action : function () {

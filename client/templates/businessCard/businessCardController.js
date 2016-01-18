@@ -1,7 +1,110 @@
 Meteor.subscribe("userData");
 
 Template.profileEdit.events({
-  'submit form': function(event){
+
+  'change input#profilePicFile': function(event){
+    event.preventDefault();
+
+    Session.set('imageIsSubmitting', 'uploading...');
+
+    var files = [];
+    var file = $('#profilePicFile')[0].files[0];
+    files.push(file);
+    console.log(files);
+    Cloudinary._upload_file(file, {}, function(err, res) {
+      if(err) {
+        console.log("Upload Error: "+err);
+      } else {
+        console.log(res.public_id);
+        var publicIdVar = res.public_id;
+        Session.set('profilPicPublicId', publicIdVar);
+        Session.set('imageIsSubmitting', 'uploaded');
+        /*
+        Meteor.users.update(Meteor.userId(), { $set: { 
+          profile.pictures.profile: publicIdVar
+        }}, function(err) {
+          if(err) {
+            Session.set('imageErrorMessage', err.message);
+          } else {
+            Session.set('imageIsSubmitting', 'uploaded');
+            console.log('successfully upload profile picture !');
+            return Meteor.user();
+          }
+        });
+*/
+      }
+    });
+  },
+
+  'change input#backgroundPicFile': function(event){
+    event.preventDefault();
+
+    Session.set('imageIsSubmitting', 'uploading...');
+
+    var files = [];
+    var file = $('#backgroundPicFile')[0].files[0];
+    files.push(file);
+    console.log(files);
+    Cloudinary._upload_file(file, {}, function(err, res) {
+      if(err) {
+        console.log("Upload Error: "+err);
+      } else {
+        console.log(res.public_id);
+        var publicIdVar = res.public_id;
+        Session.set('backgroundPicPublicId', publicIdVar);
+        Session.set('imageIsSubmitting', 'uploaded');
+        /*
+        Meteor.users.update(Meteor.userId(), { $set: { 
+          profile.pictures.background: publicIdVar
+        }}, { validate: false }, function(err) {
+          if(err) {
+            Session.set('imageErrorMessage', err.message);
+          } else {
+            Session.set('imageIsSubmitting', 'uploaded');
+            console.log('successfully upload background picture !');
+            return Meteor.user();
+          }
+        });
+        */
+      }
+    });
+  },
+
+  'change input#companyPicFile': function(event){
+    event.preventDefault();
+
+    Session.set('imageIsSubmitting', 'uploading...');
+
+    var files = [];
+    var file = $('#companyPicFile')[0].files[0];
+    files.push(file);
+    console.log(files);
+    Cloudinary._upload_file(file, {}, function(err, res) {
+      if(err) {
+        console.log("Upload Error: "+err);
+      } else {
+        console.log(res.public_id);
+        var publicIdVar = res.public_id;
+        Session.set('companyLogoPublicId', publicIdVar);
+        Session.set('imageIsSubmitting', 'uploaded');
+        /*
+        Meteor.users.update(Meteor.userId(), { $set: { 
+          profile.pictures.companyLogo: publicIdVar
+        }}, function(err) {
+          if(err) {
+            Session.set('imageErrorMessage', err.message);
+          } else {
+            Session.set('imageIsSubmitting', 'uploaded');
+            console.log('successfully upload company logo !');
+            return Meteor.user();
+          }
+        });
+        */
+      }
+    });
+  },
+
+  'submit form#cardInfo': function(event){
     event.preventDefault();
 
     Session.set('isSubmitting', 'submitting ...');
@@ -23,6 +126,9 @@ Template.profileEdit.events({
     var assistantVar = event.target.assistant.value;
     var twitterVar = event.target.twitter.value;
     var linkedInVar = event.target.linkedIn.value;
+    var profilePicVar = event.target.profilPic.value;
+    var backgroundPicVar = event.target.backgroundPic.value;
+    var companyLogoVar = event.target.companyLogo.value;
 
     Meteor.users.update(Meteor.userId(), {$set: { 
       profile: {
@@ -46,6 +152,11 @@ Template.profileEdit.events({
         social :{
           twitter: twitterVar,
           linkedIn: linkedInVar
+        },
+        pictures: {
+          profile: profilePicVar,
+          background: backgroundPicVar,
+          companyLogo: companyLogoVar
         }
       }
     }}, function(err) {
@@ -66,6 +177,18 @@ Template.profileEdit.helpers({
   },
   errorMessage: function() {
     return Session.get('errorMessage');
+  },
+  imageIsSubmitting: function() {
+    return Session.get('imageIsSubmitting');
+  },
+  profilPicPublicId: function() {
+    return Session.get('profilPicPublicId');
+  },
+  backgroundPicPublicId: function() {
+    return Session.get('backgroundPicPublicId');
+  },
+  companyLogoPublicId: function() {
+    return Session.get('companyLogoPublicId');
   }
 });
 
