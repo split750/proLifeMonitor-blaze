@@ -1,24 +1,31 @@
 
 <template name="taskList">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-md-12 container-main">
 
-	<h1>Todo List ({{incompleteCount}})</h1>
+				<h1>Todo List ({{incompleteCount}})</h1>
 
-	<label class="hide-completed">
-        <input type="checkbox" checked="{{hideCompleted}}" />
-        Hide Completed Tasks
-    </label>
+				<label class="hide-completed">
+			        <input type="checkbox" checked="{{hideCompleted}}" />
+			        Hide Completed Tasks
+			    </label>
 
-    {{#if currentUser}}
-        <form class="new-task">
-          <input type="text" name="text" placeholder="Type to add new tasks" />
-        </form>
-    {{/if}}
+			    {{#if currentUser}}
+			        <form class="new-task">
+			          <input type="text" name="text" placeholder="Type to add new tasks" />
+			        </form>
+			    {{/if}}
 
-    <ul>
-		{{#each tasks}}
-        	{{> task}}
-      	{{/each}}
-    </ul>
+			    <ul>
+					{{#each tasks}}
+			        	{{> task}}
+			      	{{/each}}
+			    </ul>
+
+			</div>
+		</div>
+	</div>
 </template>
 
 
@@ -38,7 +45,7 @@
         {{/if}}
       </button>
     {{/if}}
-    
+
     <span class="text"><strong>{{username}}</strong> - {{text}}</span>
   </li>
 </template>

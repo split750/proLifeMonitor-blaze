@@ -1,0 +1,111 @@
+<template name="profileView">
+
+	<div class="container-fluid profil-index">
+		<div class="row">
+			<!--
+			<div class="col-xs-4 col-md-offset-4 text-center bg-info" ng-show="authenticated">
+				<a class="" href="#/{{current_user}}/edit">Edit your profil</a>
+			</div>
+			-->
+			<div class="col-xs-12 header-bg">
+				<cl-image public-id="{{profil.bg}}" ></cl-image>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 container-main first">
+				<div class="row">
+					<div class="col-xs-12 logo">
+						<cl-image public-id="{{profil.companyLogo}}" ></cl-image>
+					</div>
+				</div>
+				<div class="row profil-header">
+					<div class="col-sm-3 col-xs-12 profil-pic">
+						<cl-image public-id="{{profil.profilPic}}" ></cl-image>
+					</div>
+					<div class="col-sm-9 col-xs-12 name">
+						<h1 class="h1 firstName">{{userData.profile.firstName}}, <span class="lastName">{{userdata.profile.lastName}}</span></h1>
+						<h2 class="jobTitle">{{userData.profile.job.title}}</h2>
+						<div class="border-small"></div>
+						<p>{{userData.profile.job.attachement}}</p>
+						<p>{{userData.profile.job.city}} area</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" ng-style="styleSummary">
+			<div class="col-xs-12 container-main">
+				<div class="container-title">
+					<h1>À propos de moi</h1>
+				</div>
+				<h3><span class="semi-bold">Sommaire</span></h3>
+				<p>{{userData.profile.job.summary}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 container-main">		
+				<div class="container-title">
+					<h1>Contact</h1>
+				</div>
+				<h3><span class="semi-bold">Mes</span> coordonnées</h3>
+				<div class="row">
+					<div class="col-md-6 col-xs-12">
+						<p>
+							<span class="hidden-xs strong">Email : </span>
+							<a href="mailto:{{userData.profile.job.email}}">{{userData.profile.job.email}}</a>
+						</p>
+						<p>
+							<span class="hidden-xs strong">Mobile : </span>
+							<a href="tel:{{userData.profile.job.tel}}">{{userData.profile.job.tel}}</a>
+						</p>
+						<p>
+							<span class="hidden-xs strong">Website : </span>
+							<a href="http://{{userData.profile.job.website}}" target="_blank">{{userData.profile.job.website}}</a>
+						</p>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<div class="row">
+							<div class="col-md-3">
+								<p><span class="hidden-xs strong">Address : </span></p>
+							</div>
+							<div class="col-md-8">
+								<p>{{userData.profile.job.label}}</p>
+								<p class="noMargin">{{userData.profile.job.address}}</p>
+								<p class="noMargin">{{userData.profile.job.city}} - {{userData.profile.job.postalCode}}</p>
+								<p class="noMargin">{{userData.profile.job.countryRegion}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p>
+					<span class="hidden-xs strong">Assistant : </span>
+					{{userData.profile.job.assistant}}
+				</p>
+			</div>
+		</div>
+		<div class="row" ng-style="styleSocialNetwork">
+			<div class="col-xs-12 container-main">		
+				<div class="container-title">
+					<h1>My networks</h1>
+				</div>
+				<p ng-style="styleSocialNetworkTwitter">
+					<span class="hidden-xs strong">Twitter : </span>
+					<a href="http://www.twitter.com/{{userData.profile.social.twitter}}">@{{userData.profile.social.twitter}}</a>
+				</p>
+				<p ng-style="styleSocialNetworkLinkedIn">
+					<span class="hidden-xs strong">LinkedIn : </span>
+					<a href="{{userData.profile.social.linkedIn}}">{{userData.profile.firstName}} {{userData.profile.lastName}}</a>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center last" >
+	    		<a class="menu-button blue last" ng-click="saveContact(profil)" ng-href="{{ fileUrl }}" download="{{profil.firstname}}.{{profil.lastname}}.vcf">{{isSaving}}</a>
+	    		{{#if errorMessage}}
+		        	<p class="text-warning">{{errorMessage}}</p>
+		        {{/if}}
+	    		<p class="text-success">{{success_message}}</p>
+	    	</div>
+	    </div>
+	</div>
+
+</template>

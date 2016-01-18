@@ -18,5 +18,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 iron:router
 accounts-password
-accounts-ui
 twbs:bootstrap
+aldeed:collection2
+zimme:active-route
+fastclick

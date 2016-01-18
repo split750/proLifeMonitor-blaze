@@ -1,19 +1,20 @@
 <template name="ApplicationLayout">
-  <div class="container">
     <header>
       {{> yield "header"}}
     </header>
 
-    <aside>
-      {{> yield "aside"}}
-    </aside>
+    <div class="row main-content">
+      <div class="col-xs-12">
+        {{> yield}}
+      </div>
 
-    <article>
-      {{> yield}}
-    </article>
+      <aside>
+        {{> yield "aside"}}
+      </aside>
+    </div>
 
     <footer>
       {{> yield "footer"}}
     </footer>
-  </div>
+
 </template>

@@ -1,0 +1,207 @@
+<template name="profileEdit">
+
+	<div class="container-fluid">
+		<form class="col-xs-12">
+			<div class="row">
+				<div class="col-md-12 container-main">
+					<div class="container-title">
+						<h1>Edit your profil</h1>
+					</div>
+					<h3><span class="semi-bold">Personnal</span> information</h3>
+					<p>user id : {{userData._id}}</p>
+					<div class="row">
+						<div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="firstName">First Name</label>
+					        	<input class="form-control" type="text" id="firstName" name="firstName" placeholder="Enter your First name" value="{{userData.profile.firstName}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="lastName">Last Name</label>
+					        	<input class="form-control" type="text" id="lastName" name="lastName" placeholder="Enter your Last name" value="{{userData.profile.lastName}}">
+					        </fieldset>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 container-main">
+					<div class="container-title">
+						<h1>Edit your photos</h1>
+					</div>
+					<h3><span class="semi-bold">Profil</span> pictures</h3>
+					<div class="row">
+						<div class="col-sm-6">
+					    </div>
+					    <div class="col-sm-6 profil-pic">
+					    	<cl-image public-id="{{profil.profilPic}}" ng-show="showprofilPic"></cl-image>
+					    	<cl-image public-id="{{profilPic}}" ng-hide="showprofilPic"></cl-image>
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4" ngf-drop="uploadFiles2($files)" ng-model="myFile2" ng-multiple="false">
+							<fieldset class="form-group">
+					        	<label>Background picture</label>
+					        	<div class="upload_button_holder">
+				                    <div href="#" class="btn btn-default" title="upload2" resetOnClick="true" >Upload background</div>
+				                </div>
+				            </fieldset>
+					    </div>
+					    <div class="col-sm-8 editBg">
+					    	<cl-image public-id="{{profil.bg}}" ng-show="showbg"></cl-image>
+					    	<cl-image public-id="{{bg}}" ng-hide="showbg"></cl-image>
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6" ngf-drop="uploadFiles3($files)" ng-model="files" ng-multiple="false">
+							<fieldset class="form-group">
+					        	<label>Company picture</label>
+					        	<div class="upload_button_holder">
+				                    <div href="#" class="btn btn-default" ngf-select="uploadFiles3($files)" title="upload3" resetOnClick="true" >Upload company logo</div>
+				                </div>
+				            </fieldset>
+					    </div>
+					    <div class="col-sm-6 editBg">
+					    	<cl-image public-id="{{profil.companyLogo}}" ng-show="showcompanyLogo"></cl-image>
+					    	<cl-image public-id="{{companyLogo}}" ng-hide="showcompanyLogo"></cl-image>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 container-main">
+					<div class="container-title">
+						<h1>Edit your professionnal</h1>
+					</div>
+					<h3><span class="semi-bold">Job</span> information</h3>
+					
+					<div class="row">
+						<div class="col-sm-8">
+							<fieldset class="form-group">
+					        	<label for="company">Company name</label>
+					        	<input class="form-control" type="text" id="company" name="company" placeholder="Enter your company name" value="{{userData.profile.job.company}}">
+					        </fieldset>
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8">
+							<fieldset class="form-group">
+					        	<label for="title">Job tile</label>
+					        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter your job title" value="{{userData.profile.job.title}}">
+					        </fieldset>
+					    </div>
+					</div>
+					<div class="row">
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="attachment">Attachment / Direction</label>
+					        	<input class="form-control" type="text" id="attachment" name="attachment" placeholder="Enter your attachment" value="{{userData.profile.job.attachment}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-12">
+							<fieldset class="form-group">
+					        	<label for="summary">Summary</label>
+					        	<textarea class="form-control" id="summary" name="summary" placeholder="Enter your summary" value="{{userData.profile.job.summary}}"></textarea>
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="email">Email</label>
+					        	<input class="form-control" type="mail" id="email" name="email" placeholder="Enter your email" value="{{userData.profile.job.email}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="tel">Tel</label>
+					        	<input class="form-control" type="tel" id="tel" name="tel" placeholder="Enter your tel" value="{{userData.profile.job.tel}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="website">Website</label>
+					        	<input class="form-control" type="text" id="website" name="website" placeholder="Enter your website address" value="{{userData.profile.job.website}}">
+					        </fieldset>
+					    </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8">
+							<fieldset class="form-group">
+					        	<label for="label">Name of the place or building</label>
+					        	<input class="form-control" type="text" id="label" name="label" placeholder="Enter the name of the place or the building" value="{{userData.profile.job.label}}">
+					        </fieldset>
+					    </div>
+					</div>
+					<div class="row">   
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="address">Address</label>
+					        	<input class="form-control" type="text" id="address" name="address" placeholder="Enter your address" value="{{userData.profile.job.address}}">
+					        </fieldset>
+					    </div>
+					</div>
+					<div class="row">
+					    <div class="col-sm-4">
+							<fieldset class="form-group">
+					        	<label for="city">City</label>
+					        	<input class="form-control" type="text" id="city" name="city" placeholder="Enter the city name" value="{{userData.profile.job.city}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-4">
+							<fieldset class="form-group">
+					        	<label for="postalCode">Postal code</label>
+					        	<input class="form-control" type="text" id="postalCode" name="postalCode" placeholder="Enter the postalCode" value="{{userData.profile.job.postalCode}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-4">
+							<fieldset class="form-group">
+					        	<label for="countryRegion">Country</label>
+					        	<input class="form-control" type="text" id="countryRegion" name="countryRegion" placeholder="Enter the country/Region" value="{{userData.profile.job.countryRegion}}">
+					        </fieldset>
+					    </div>
+					</div>
+					<div class="row">    
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="assistant">Assistant</label>
+					        	<input class="form-control" type="text" id="assistant" name="assistant" placeholder="Enter the name of your assistant" value="{{userData.profile.job.assistant}}">
+					        </fieldset>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 container-main">
+					<div class="container-title">
+						<h1>Edit your social networks</h1>
+					</div>
+					<h3><span class="semi-bold">Social</span> contacts</h3>
+					
+					<div class="row">
+						<div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="twitter">Twitter</label>
+					        	<input class="form-control" type="text" id="twitter" name="twitter" placeholder="Enter your Twitter username" value="{{userData.profile.social.twitter}}">
+					        </fieldset>
+					    </div>
+					    <div class="col-sm-6">
+							<fieldset class="form-group">
+					        	<label for="linkedIn">LinkedIn</label>
+					        	<input class="form-control" type="text" id="linkedIn" name="linkedIn" placeholder="Enter your linkedIn link" value="{{userData.profile.social.linkedIn}}">
+					        </fieldset>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+		      <div class="col-md-12 container-main text-center saveProfil">
+		        <input type="submit" value="{{isSubmitting}}" class="btn btn-primary">
+		        {{#if errorMessage}}
+		        	<p class="text-warning">{{errorMessage}}</p>
+		        {{/if}}
+		      </div>
+		    </div>
+	    </form>
+	</div>
+
+</template>
