@@ -99,6 +99,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 text-center last" >
+				<a id="downloadCSV" href="#" download="{{userData.profile.firstName}} {{userData.profile.lastName}}.vcf">test vcf</a>
 	    		<a class="menu-button blue last" ng-click="saveContact(profil)" ng-href="{{ fileUrl }}" download="{{profil.firstname}}.{{profil.lastname}}.vcf">{{isSaving}}</a>
 	    		{{#if errorMessage}}
 		        	<p class="text-warning">{{errorMessage}}</p>
