@@ -143,7 +143,11 @@
 							</form>
 					    </div>
 					    <div class="col-sm-6 profil-pic">
-					    	<img src="{{c.url userData.profile.pictures.profile}}">
+					    	{{#if profilePicPublicId}}
+					    		<img src="{{c.url profilePicPublicId}}">
+					    	{{else}}
+					    		<img src="{{c.url userData.profile.pictures.profile}}">
+					    	{{/if}}
 					    </div>
 					</div>
 					<div class="row">
@@ -157,7 +161,11 @@
 							</form>
 					    </div>
 					    <div class="col-sm-6 editBg">
-					    	<img src="{{c.url userData.profile.pictures.background}}">
+					    	{{#if backgroundPicPublicId}}
+					    		<img src="{{c.url backgroundPicPublicId}}">
+					    	{{else}}
+					    		<img src="{{c.url userData.profile.pictures.background}}">
+					    	{{/if}}
 					    </div>
 					</div>
 					<div class="row">

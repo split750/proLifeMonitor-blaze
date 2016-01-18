@@ -17,21 +17,22 @@ Template.profileEdit.events({
       } else {
         console.log(res.public_id);
         var publicIdVar = res.public_id;
-        Session.set('profilPicPublicId', publicIdVar);
-        Session.set('imageIsSubmitting', 'uploaded');
-        /*
-        Meteor.users.update(Meteor.userId(), { $set: { 
-          profile.pictures.profile: publicIdVar
-        }}, function(err) {
+        
+        // delete old photo
+        var profilPicPublicIdVar = Meteor.user().profile.pictures.profile;
+        console.log(profilPicPublicIdVar);
+
+        Cloudinary.delete(profilPicPublicIdVar, function(err, res) {
           if(err) {
-            Session.set('imageErrorMessage', err.message);
+            console.log("can't delete old picture: "+err);
           } else {
-            Session.set('imageIsSubmitting', 'uploaded');
-            console.log('successfully upload profile picture !');
-            return Meteor.user();
+            console.log("successfully delete old picture");
           }
         });
-*/
+        
+        //Set new link
+        Session.set('profilPicPublicId', publicIdVar);
+        Session.set('imageIsSubmitting', 'uploaded'); 
       }
     });
   },
@@ -51,23 +52,22 @@ Template.profileEdit.events({
       } else {
         console.log(res.public_id);
         var publicIdVar = res.public_id;
-        Session.set('backgroundPicPublicId', publicIdVar);
-        Session.set('imageIsSubmitting', 'uploaded');
-        /*
-        Meteor.users.update(Meteor.userId(), { $set: { 
-          profile.pictures.background: publicIdVar
-        }}, { validate: false }, function(err) {
+        
+        // delete old photo
+        var backgroundPicPublicIdVar = Meteor.user().profile.pictures.background;
+        Cloudinary.delete(backgroundPicPublicIdVar, function(err, res) {
           if(err) {
-            Session.set('imageErrorMessage', err.message);
+            console.log("can't delete old picture: "+err);
           } else {
-            Session.set('imageIsSubmitting', 'uploaded');
-            console.log('successfully upload background picture !');
-            return Meteor.user();
+            console.log("successfully delete old picture");
           }
         });
-        */
+
+        //Set new link
+        Session.set('backgroundPicPublicId', publicIdVar);
+        Session.set('imageIsSubmitting', 'uploaded');
       }
-    });
+    }); 
   },
 
   'change input#companyPicFile': function(event){
@@ -85,21 +85,20 @@ Template.profileEdit.events({
       } else {
         console.log(res.public_id);
         var publicIdVar = res.public_id;
-        Session.set('companyLogoPublicId', publicIdVar);
-        Session.set('imageIsSubmitting', 'uploaded');
-        /*
-        Meteor.users.update(Meteor.userId(), { $set: { 
-          profile.pictures.companyLogo: publicIdVar
-        }}, function(err) {
+        
+        // delete old photo
+        var companyLogoPublicIdVar = Meteor.user().profile.pictures.companyLogo;
+        Cloudinary.delete(companyLogoPublicIdVar, function(err, res) {
           if(err) {
-            Session.set('imageErrorMessage', err.message);
+            console.log("can't delete old picture: "+err);
           } else {
-            Session.set('imageIsSubmitting', 'uploaded');
-            console.log('successfully upload company logo !');
-            return Meteor.user();
+            console.log("successfully delete old picture");
           }
         });
-        */
+
+        //Set new link
+        Session.set('companyLogoPublicId', publicIdVar);
+        Session.set('imageIsSubmitting', 'uploaded');
       }
     });
   },

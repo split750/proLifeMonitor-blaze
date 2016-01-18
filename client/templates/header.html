@@ -16,7 +16,7 @@
 	          <a class="menu-button secondary {{isActiveRoute 'register'}}" href="/register">Register</a>
 	        </div>
 	        <div class="{{loggedIn}}">
-	          <p class="">Signed in as <a href="/profile/view">{{currentUser._id}}</a></p>
+	          <p class="">Signed in as <a href="/profile/view">{{currentUser.profile.firstName}}</a></p>
 	          <a class="menu-button warning logout" href="/">Logout</a>
 	        </div>
 	      </div>
